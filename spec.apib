@@ -1,0 +1,1217 @@
+FORMAT: 1A
+
+# Joogivanema infosüsteemi API
+
+Laohaldus- ja raamatupidamisrakendus üliõpilasorganisatsioonidele.
+
+Kõik aega tähistavad sõned peavad olema ISO8601 formaadis. Näiteks "2016-01-01T06:38:09Z".
+
+## Varad [/varad{?aeg,alates,kuni}]
+Ülevaade varade kogustest. Varadeks on sularaha, raha pangakontol, liikmete saldode summa vastandväärtus, tooted ja taara. Liikmete saldode summa on esitatud vastandväärtusena selleks, et varade kokkuliitmisel saaks tulemuseks joogikassa koguväärtuse.
+
+### Näita varade koguseid [GET]
+Vaikimisi tagastab järjendi varade kogustest pärast iga tehingut alates semestri algusest kuni praeguse hetkeni. Juhul kui defineeritud on aeg, siis tagastab varade koguse sellel ajahetkel.
+
++ Parameters
+
+    + aeg (datetime, optional) - Mis ajahetke varade kogust näidata?
+    + alates (datetime, optional) - Mis hetkest alates? Vaikimisi käesoleva semestri algus.
+    + kuni (datetime, optional) - Mis hetkeni? Vaikimisi käesolev hetk.
+
++ Response 200 (application/json)
+    + Attributes (array[varad])
+
+## Group Tooted
+Kõikvõimalikud kaubaartiklid.
+
+## kollektsiooni vaade [/tooted{?limit,offset,aeg}]
+
+### Näita kõiki tooteid [GET]
+
++ Parameters
+
+    + limit (number, optional) - Kui mitu toodet tuua maksimaalselt?
+        + Default: 20
+    + offset (number, optional) - Nihe algusest
+        + Default: 0
+    + aeg (string, optional) - Mis ajahetke järgi laoseisu näidatakse. Vaikimisi käesolev hetk.
+
++ Response 200 (application/json)
+
+    + Attributes (array[toode kollektsioonvaade])
+
+### Loo uus toode [POST]
+Toote loomiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Request (application/json)
+    
+    + Attributes (toode loomine)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /tooted/ubgukb
+
+    + Attributes (toode detailvaade uus)
+
+## üksikvaade [/tooted/{id}{?aeg}]
+
++ Parameters
+
+    + id: ax7Gji - Toote ID
+
+### Näita toodet [GET]
+
++ Parameters
+
+    + aeg (optional) - Mis hetke laoseisu näidata?
+
++ Attributes (toode detailvaade)
+
++ Response 200 (application/json)
+
+        {
+            "id": "ax7Gji",
+            "nimi": "A. Le Coq Premium",
+            "taara": "pudel",
+            "uhikuKogus": "0,5l",
+            "kogus": 100,
+            "omahind": 0.652,
+            "muugihind": 1,
+            "triipkood": "982763489",
+            "aegumiskuupaev": "2016-12-06T06:36:09Z",
+            "aeguvaKogus": 20,
+            "arhiveeritud": false,
+            "kustutatav": false,
+            "kategooriad": ["õlu"],
+            "batchid": [
+              {
+                "id": "oipsjo",
+                "aegumiskuupaev": "2016-12-06T06:36:09Z",
+                "laoseis": 20,
+                "uhikuHind": 0.76,
+                "ostukogus": 20,
+                "ostuhetk": "2016-01-01T06:36:09Z"
+              },
+              {
+                "id": "oipsjy",
+                "aegumiskuupaev": "2017-12-06T06:36:09Z",
+                "laoseis": 40,
+                "uhikuHind": 0.6,
+                "ostukogus": 40,
+                "ostuhetk": "2016-01-01T06:37:09Z"
+              },
+              {
+                "id": "oipsjt",
+                "aegumiskuupaev": "2018-06-06T06:36:09Z",
+                "laoseis": 40,
+                "uhikuHind": 0.65,
+                "ostukogus": 40,
+                "ostuhetk": "2016-01-01T06:38:09Z"
+              }
+            ]
+        }
+
+### Muuda toodet [PUT]
+Toote muutmiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Request (application/json)
+
+        {
+            nimi: "Uus nimi"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": "ax7Gji",
+            "nimi": "Uus nimi",
+            "taara": "pudel",
+            "uhikuKogus": "0,5l",
+            "kogus": 100,
+            "omahind": 0.652,
+            "muugihind": 1,
+            "triipkood": "982763489",
+            "aegumiskuupaev": "2016-12-06T06:36:09Z",
+            "aeguvaKogus": 20,
+            "arhiveeritud": false,
+            "kustutatav": false,
+            "kategooriad": ["õlu"],
+            "batchid": [
+              {
+                "id": "oipsjo",
+                "aegumiskuupaev": "2016-12-06T06:36:09Z",
+                "laoseis": 20,
+                "uhikuHind": 0.76,
+                "ostukogus": 20,
+                "ostuhetk": "2016-01-01T06:36:09Z"
+              },
+              {
+                "id": "oipsjy",
+                "aegumiskuupaev": "2017-12-06T06:36:09Z",
+                "laoseis": 40,
+                "uhikuHind": 0.6,
+                "ostukogus": 40,
+                "ostuhetk": "2016-01-01T06:37:09Z"
+              },
+              {
+                "id": "oipsjt",
+                "aegumiskuupaev": "2018-06-06T06:36:09Z",
+                "laoseis": 40,
+                "uhikuHind": 0.65,
+                "ostukogus": 40,
+                "ostuhetk": "2016-01-01T06:38:09Z"
+              }
+            ]
+        }
+
+### Kustuta või arhiveeri toode [DELETE]
+Juhul kui tootele viitab mõni tehing, siis seatakse toode arhiveerituks. Vastasel juhul kustutatakse see andmebaasist.
+
+Toote kustutamiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Response 204 (application/json)
+
+## Group Kategooriad
+Kategooriad toodete jaoks. Kategooriaid ei saa eraldi luua. Kategooriad on lihtsalt ühend kõigist toodetele määratud kategooriatest.
+
+### Näita kõiki kategooriaid [GET /kategooriad]
++ Response 200 (application/json)
+
+        [
+            "õlu",
+            "šokolaad",
+            "toit"
+        ]
+
+## Group Liikmed
+Kõik organisatsiooni liikmed, kellele võimaldatakse toodete ostmist ettemaksust.
+
+## kollektsiooni vaade [/liikmed{?limit,offset}]
+
++ Parameters
+
+    + limit (number, optional) - Kui mitu liiget tuua maksimaalselt?
+        + Default: 20
+    + offset (number, optional) - Nihe algusest
+        + Default: 0
+
+### Näita kõiki liikmeid [GET]
+    
++ Response 200 (application/json)
+
+    + Attributes (array[liige])
+        
+### Loo uus liige [POST]
+Uue liikme loomiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Request (application/json)
+
+    + Attributes (liige loomine)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /liikmed/32ihU8
+
+    + Attributes (liige uus)
+
+## üksikvaade [/liikmed/{id}]
+
++ Parameters
+
+    + id: asy5cf - Liikme ID
+
+### Näita liiget [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (liige)
+
+### Muuda liiget [PUT]
+Liikme muutmiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Request (application/json)
+
+        {
+            "nimi": "Uus nimi"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "id": "asy5cf",
+            "nimi": "Uus nimi",
+            "staatus": "ksv!",
+            "koondis": "Tartu",
+            "meiliaadress": "janek.priimann@gmail.com",
+            "telefon": "55567899",
+            "saldo": 0,
+            "viimaneMakse": "2010-08-01T21:36:09.004Z",
+            "kustutatav": false,
+            "arhiveeritud": false
+        }
+
+### Kustuta või arhiveeri liige [DELETE]
+Juhul kui antud liikmele viitab mõni tehing, seatakse liige arhiveerituks. Vastasel juhul liige kustutatakse andmebaasist.
+
+Liikme kustutamiseks peavad sul olema joogivanema õigused käesoleval semestril.
+
++ Response 204 (application/json)
+
+## Group Tehingud
+Kõik tehingud, mis on mõjutanud joogikassa varade koguseid.
+
+## kollektsiooni vaade [/tehingud{?alates,kuni}]
+
+### Näita kõiki tehinguid [GET]
+
++ Parameters
+
+    + alates (datetime, optional) - Mis hetkest alates? Vaikimisi käesoleva semestri algus.
+    + kuni (datetime, optional) - Mis hetkeni? Vaikimisi käesolev hetk.
+
++ Attributes (tehing)
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "owiaej",
+                "aeg": "2016-01-01T06:38:09Z",
+                "selgitus": "Ostsin Premiumit sisse",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 26
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 26,
+                    "kogus": 40,
+                    "toode": {
+                        "id": "ax7Gji",
+                        "nimi": "A. Le Coq Premium",
+                        "taara": "pudel",
+                        "uhikuKogus": "0,5l"
+                    }
+                }
+            },
+            {
+                "id": "owiarj",
+                "aeg": "2016-01-01T06:38:09Z",
+                "selgitus": "Ostsin Premiumit sisse (taara)",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 4
+                },
+                "deebet": {
+                    "tuup": "taara",
+                    "summa": 4
+                }
+            },
+            {
+                "id": "owi3ej",
+                "aeg": "2016-01-01T06:37:09Z",
+                "selgitus": "Ostsin veel Premiumit sisse",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 24
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 24,
+                    "kogus": 40,
+                    "toode": {
+                        "id": "ax7Gji",
+                        "nimi": "A. Le Coq Premium",
+                        "taara": "pudel",
+                        "uhikuKogus": "0,5l"
+                    }
+                }
+            },
+            {
+                "id": "ows3ej",
+                "aeg": "2016-01-01T06:37:09Z",
+                "selgitus": "Ostsin veel Premiumit sisse (taara)",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 4
+                },
+                "deebet": {
+                    "tuup": "taara",
+                    "summa": 4
+                }
+            },
+            {
+                "id": "4wi3ej",
+                "aeg": "2016-01-01T06:36:09Z",
+                "selgitus": "Ostsin veel Premiumit sisse 2",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 15.2
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 15.2,
+                    "kogus": 20,
+                    "toode": {
+                        "id": "ax7Gji",
+                        "nimi": "A. Le Coq Premium",
+                        "taara": "pudel",
+                        "uhikuKogus": "0,5l"
+                    }
+                }
+            },
+            {
+                "id": "4fi3ej",
+                "aeg": "2016-01-01T06:36:09Z",
+                "selgitus": "Ostsin veel Premiumit sisse 2 (taara)",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 2
+                },
+                "deebet": {
+                    "tuup": "taara",
+                    "summa": 2
+                }
+            },
+            {
+                "id": "4we3ej",
+                "aeg": "2016-01-02T06:37:09Z",
+                "selgitus": "Ostsin Specialit sisse",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 14
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 14,
+                    "kogus": 20,
+                    "toode": {
+                        "id": "239e8h",
+                        "nimi": "A. Le Coq Special",
+                        "taara": "purk",
+                        "uhikuKogus": "1 pint"
+                    }
+                }
+            },
+            {
+                "id": "4we3de",
+                "aeg": "2016-01-02T06:37:09Z",
+                "selgitus": "Ostsin Specialit sisse (taara)",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 2
+                },
+                "deebet": {
+                    "tuup": "taara",
+                    "summa": 2
+                }
+            },
+            {
+                "id": "4re3ej",
+                "aeg": "2016-01-02T06:37:09Z",
+                "selgitus": "Ostsin veel Specialit sisse",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 36
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 36,
+                    "kogus": 40,
+                    "toode": {
+                        "id": "239e8h",
+                        "nimi": "A. Le Coq Special",
+                        "taara": "purk",
+                        "uhikuKogus": "1 pint"
+                    }
+                }
+            },
+            {
+                "id": "4dsiej",
+                "aeg": "2016-01-02T06:37:09Z",
+                "selgitus": "Ostsin veel Specialit sisse (taara)",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 4
+                },
+                "deebet": {
+                    "tuup": "taara",
+                    "summa": 4
+                }
+            },
+            {
+                "id": "ste3ej",
+                "aeg": "2016-01-03T06:37:09",
+                "selgitus": "Ostsin šokolaadi sisse",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 8.8
+                },
+                "deebet": {
+                    "tuup": "toode",
+                    "summa": 8.8,
+                    "kogus": 10,
+                    "toode": {
+                        "id": "100e8h",
+                        "nimi": "Milka Daim",
+                        "taara": null,
+                        "uhikuKogus": "100 grammi"
+                    }
+                }
+            },
+            {
+                "id": "ioubgb",
+                "aeg": "2016-01-04T06:36:09.005Z",
+                "selgitus": "Müüsin liikmele toote",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "toode",
+                    "summa": 0.76,
+                    "kogus": 1,
+                    "toode": {
+                        "id": "ax7Gji",
+                        "nimi": "A. Le Coq Premium",
+                        "taara": "pudel",
+                        "uhikuKogus": "0,5l"
+                    }
+                },
+                "deebet": {
+                    "tuup": "liige",
+                    "summa": 1,
+                    "liige": {
+                        "id": "asytcf",
+                        "staatus": "ksv!",
+                        "nimi": "Kaarel Ratas"
+                    }
+                }
+            },
+            {
+                "id": "io7bgb",
+                "aeg": "2016-01-04T07:36:09.005Z",
+                "selgitus": "Ostsin pastakaid",
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "sularaha",
+                    "summa": 3.5
+                },
+                "deebet": {
+                    "tuup": "tuhi",
+                    "summa": 0
+                }
+            }
+        ]
+
+### Lisa uus tehing [POST]
+Uue tehingu loomiseks peavad sul olema joogivanema õigused tehingu toimumise hetkel. Tehingu kuupäev ei tohi olla tulevikus.
+
++ Attributes
+
+    + aeg (optional) - Tähistab tehingu toimumise hetke. Vaikimisi päringu sooritamise hetk.
+    + selgitus (optional)
+    + kreedit (required) - Vähenev vara.
+        + tuup (enum, required) - Vara tüüp.
+            + tuhi
+            + sularaha
+            + arvelRaha
+            + liige
+            + toode
+            + taara
+        + summa (number, required) - Pole kohustuslik, kui tuup==toode.
+        + toode (optional) - Kohustuslik kui tuup==toode.
+            + id (required) - Toote id.
+        + kogus (number, optional) - Kohustuslik kui tuup==toode. Müüdavate toodete kogus.
+        + liige (optional) - Kohustuslik kui tuup==liige.
+            + id (required) - Liikme id.
+    + deebet (required) - Suurenev vara.
+        + tuup (enum, required) - Vara tüüp.
+            + tuhi
+            + sularaha
+            + arvelRaha
+            + liige
+            + toode
+            + taara
+        + summa (number, required)
+        + toode (optional) - Kohustuslik kui tuup==toode.
+            + id (required) - Toote id.
+            + aegumiskuupaev (required) - Toote aegumiskuupäev.
+        + kogus - Kohustuslik kui tuup==toode. Sisse ostetud toodete kogus.
+        + liige (optional) - Kohustuslik kui tuup==liige.
+            + id (required) - Liikme ID.
+
++ Request (application/json)
+
+        {
+            "selgitus": "Sularaha väljavõtt",
+            "kreedit": {
+                "tuup": "arvelRaha",
+                "summa": 40
+            },
+            "deebet": {
+                "tuup": "sularaha",
+                "summa": 40
+            }
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            Location: tehingud/coiasw
+        
+    + Body
+
+            {
+                "id": "coiasw",
+                "aeg": "2016-01-02T06:37:09Z",
+                "selgitus": "Sularaha väljavõtt",
+                "looja": {
+                    "id": "casdnc",
+                    "staatus": "ksv!",
+                    "nimi": "Madis Martin Lutter"
+                },
+                "muudetav": true,
+                "legaalne": true,
+                "kreedit": {
+                    "tuup": "arvelRaha",
+                    "summa": 40
+                },
+                "deebet": {
+                    "tuup": "sularaha",
+                    "summa": 40
+                }
+            }
+
+## üksikvaade [/tehingud/{id}]
+
++ Parameters
+
+    + id: 4dsiej - Tehingu ID
+
+### Näita tehingut [GET]
+
++ Attributes
+
+    + id: 4dsiej - Tehingu ID.
+    + aeg: `2016-01-01T06:38:09Z` - Tehingu sooritamise hetk.
+    + selgitus
+    + looja - Kasutajakonto, kellelt tuli tehingu loomise päring.
+        + id: casdnc - Liikme ID.
+        + staatus: ksv!
+        + nimi: Madis Martin Lutter
+    + muudetav: true (boolean) - Kas kasutaja saab tehingut muuta? Muutmine on keelatud tehingute puhul, mille on loonud back-end automaatselt, et laoseis inventuuril loetud summadega vastavusse viia.
+    + legaalne: true (boolean) - Tehing ei ole legaalne, kui selle tulemusel muutub kreedit poole peal oleva vara kogus negatiivseks tehingujärgselt.
+    + kreedit (object) - Vähenev vara.
+    + deebet (object) - Suurenev vara.
+
++ Response 200 (application/json)
+
+        {
+            "id": "4dsiej",
+            "aeg": "2016-01-02T06:37:09Z",
+            "selgitus": "Ostsin veel Specialit sisse (taara)",
+            "looja": {
+                "id": "casdnc",
+                "staatus": "ksv!",
+                "nimi": "Madis Martin Lutter"
+            },
+            "muudetav": true,
+            "legaalne": true,
+            "kreedit": {
+                "tuup": "arvelRaha",
+                "summa": 4
+            },
+            "deebet": {
+                "tuup": "taara",
+                "summa": 4
+            }
+        }
+
+### Muuda tehingut [PUT]
+Tehingu muutmiseks peavad sul olema joogivanema õigused tehingu toimumise semestril ning tehingud ei tohi olla külmutatud vastaval semestril. 
+
++ Request (application/json)
+
+        {
+            "selgitus": "Muudetud selgitus"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": "4dsiej",
+            "aeg": "2016-01-02T06:37:09Z",
+            "selgitus": "Muudetud selgitus",
+            "looja": {
+                "id": "casdnc",
+                "staatus": "ksv!",
+                "nimi": "Madis Martin Lutter"
+            },
+            "muudetav": true,
+            "legaalne": true,
+            "kreedit": {
+                "tuup": "arvelRaha",
+                "summa": 4
+            },
+            "deebet": {
+                "tuup": "taara",
+                "summa": 4
+            }
+        }
+        
+### Kustuta tehing [DELETE]
+Tehingu kustutamiseks peavad sul olema joogivanema õigused tehingu toimumise semestril ning tehingud ei tohi olla külmutatud vastaval semestril.
+
++ Response 204 (application/json)
+
+## Group Inventuurid
+Joogikassa varade üle lugemiste tulemused.
+
+## kollektsiooni vaade [/inventuurid{?alates,kuni}]
+
+### Näita kõiki inventuure [GET]
++ Parameters
+
+    + alates (datetime, optional) - Mis hetkest alates? Vaikimisi käesoleva semestri algus.
+    + kuni (datetime, optional) - Mis hetkeni? Vaikimisi käesolev hetk.
+
++ Attributes
+
+    + id: oij0a9 - Inventuuri ID.
+    + aeg: `2016-01-01T06:36:09.004Z` - Inventuuri sooritamise hetk.
+    + kommentaar
+    + kustutatav: true (boolean) - Juhul kui tegu on ameti üle andmisega seotud inventuuriga, on inventuuri kustutamine keelatud.
+    + eeldatav - Varade eeldatavad kogused inventuuri hetkel.
+        + sularaha: 389.97 (number)
+        + arvelRaha: 2234.65 (number)
+        + krediit: 300.01 (number) - Liikmete saldode summa vastandväärtus.
+        + taara: 12.3 (number)
+        + tootedKokku: 66.846 (number)
+        + kokku: 3003.056 (number) - Joogikassa eeldatav koguväärtus.
+    + loetud - Varade üle loetud kogused inventuuril.
+        + sularaha: 389.97 (number)
+        + taara: 12.3 (number)
+        + tootedKokku: 66.086 (number)
+        + kokku: 3002.296 (number) - Joogikassa tegelik koguväärtus.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "oij0a9",
+                "aeg": "2016-01-01T06:36:09.004Z",
+                "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+                "kustutatav": true,
+                "eeldatav": {
+                    "sularaha": 389.97,
+                    "arvelRaha": 2234.65,
+                    "krediit": 300.01,
+                    "taara": 12.3,
+                    "tootedKokku": 66.846,
+                    "kokku": 3003.056
+                },
+                "loetud": {
+                    "sularaha": 389.97,
+                    "taara": 12.3,
+                    "tootedKokku": 66.086,
+                    "kokku": 3002.296
+                }
+            },
+            {
+                "id": "oij0e9",
+                "aeg": "2016-02-01T06:36:09.004Z",
+                "kommentaar": "Inimesed tõid ise taarat juurde.",
+                "kustutatav": true,
+                "eeldatav": {
+                    "sularaha": 320.97,
+                    "arvelRaha": 2200.65,
+                    "krediit": 300.01,
+                    "taara": 16.3,
+                    "tootedKokku": 89.846,
+                    "kokku": 2927.776
+                },
+                "loetud": {
+                    "sularaha": 320.97,
+                    "taara": 0.3,
+                    "tootedKokku": 100.086,
+                    "kokku": 2922.016
+                }
+            }
+        ]
+
+### Lisa uus inventuur [POST]
+Uue inventuuri lisamiseks peavad sul olema joogivanema õigused.
+
++ Attributes
+
+    + kommentaar (optional)
+    + sooritajad (array, optional) - Inventuuri sooritanud liikmed. Vaikimisi päringu tegija konto.
+        + (object)
+            + id (required) - Liikme ID.
+    + loetud (array, required)
+        + sularaha (number, required) - Üle loetud sularaha kogus.
+        + taara (number, required) - Üle loetud taara maksumus.
+    + tooted (array, required)
+        + id (required) - Toote ID.
+        + loetudKogus (number, required) - Üle loetud toote kogus.
+
++ Request (application/json)
+
+        {
+            "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+            "sooritajad": [
+              {
+                "id": "casdnc",
+              },
+              {
+                "id": "asytcf",
+              }
+            ],
+            "loetud": {
+                "sularaha": 389.97,
+                "taara": 12.3,
+            },
+            "tooted": [
+              {
+                "id": "ax7Gji",
+                "loetudKogus": 54,
+              },
+              {
+                "id": "239e8h",
+                "loetudKogus": 0,
+              },
+              {
+                "id": "100e8h",
+                "loetudKogus": 20,
+              }
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+        
+            Location: inventuurid/oij0a9
+    
+    + Body
+    
+            {
+                "id": "oij0a9",
+                "aeg": "2016-01-01T06:36:09.004Z",
+                "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+                "sooritajad": [
+                  {
+                    "id": "casdnc",
+                    "staatus": "ksv!",
+                    "nimi": "Madis Martin Lutter"
+                  },
+                  {
+                    "id": "asytcf",
+                    "staatus": "ksv!",
+                    "nimi": "Kaarel Ratas"
+                  }
+                ],
+                "kustutatav": true,
+                "eeldatav": {
+                    "sularaha": 389.97,
+                    "arvelRaha": 2234.65,
+                    "krediit": 300.01,
+                    "taara": 12.3,
+                    "tootedKokku": 66.846,
+                    "kokku": 3003.056
+                },
+                "loetud": {
+                    "sularaha": 389.97,
+                    "taara": 12.3,
+                    "tootedKokku": 66.086,
+                    "kokku": 3002.296
+                },
+                "tooted": [
+                  {
+                    "id": "ax7Gji",
+                    "nimi": "A. Le Coq Premium",
+                    "taara": "klaaspudel",
+                    "uhikuKogus": "0,5l",
+                    "eeldatavKogus": 54,
+                    "loetudKogus": 54,
+                    "omahind": 0.909
+                  },
+                  {
+                    "id": "239e8h",
+                    "nimi": "A. Le Coq Special",
+                    "taara": "purk",
+                    "uhikuKogus": "1 pint",
+                    "eeldatavKogus": 1,
+                    "loetudKogus": 0,
+                    "omahind": 0.76
+                  },
+                  {
+                    "id": "100e8h",
+                    "nimi": "Milka Daim",
+                    "taara": null,
+                    "uhikuKogus": "100 grammi",
+                    "eeldatavKogus": 20,
+                    "loetudKogus": 20,
+                    "omahind": 0.85
+                  }
+                ]
+            }
+            
+## üksikvaade [/inventuurid/{id}]
+
++ Parameters
+
+    + id: oij0a9 - Inventuuri ID
+
+### Näita inventuuri [GET]
+
++ Attributes
+
+    + id: oij0a9 - Inventuuri ID.
+    + aeg: `2016-01-01T06:36:09.004Z` - Inventuuri sooritamise hetk.
+    + kommentaar
+    + sooritajad (array) - Inventuuri tulemusi kinnitavate inimeste kasutajakontod
+        + (object)
+            + id: casdnc - Liikme ID.
+            + staatus: ksv!
+            + nimi: Madis Martin Lutter
+    + kustutatav: true (boolean) - Juhul kui tegu on ameti üle andmisega seotud inventuuriga, on inventuuri kustutamine keelatud.
+    + eeldatav - Varade eeldatavad kogused inventuuri hetkel.
+        + sularaha: 389.97 (number)
+        + arvelRaha: 2234.65 (number)
+        + krediit: 300.01 (number) - Liikmete saldode summa vastandväärtus.
+        + taara: 12.3 (number)
+        + tootedKokku: 66.846 (number)
+        + kokku: 3003.056 (number) - Joogikassa eeldatav koguväärtus.
+    + loetud - Varade üle loetud kogused inventuuril.
+        + sularaha: 389.97 (number)
+        + taara: 12.3 (number)
+        + tootedKokku: 66.086 (number)
+        + kokku: 3002.296 (number) - Joogikassa tegelik koguväärtus.
+
++ Response 200 (application/json)
+
+        {
+            "id": "oij0a9",
+            "aeg": "2016-01-01T06:36:09.004Z",
+            "kommentaar": "Siia saab teha märkmeid. Näiteks, põhjendada, miks numbrid nii valed on millegipärast.",
+            "sooritajad": [
+              {
+                "id": "casdnc",
+                "staatus": "ksv!",
+                "nimi": "Madis Martin Lutter"
+              },
+              {
+                "id": "asytcf",
+                "staatus": "ksv!",
+                "nimi": "Kaarel Ratas"
+              }
+            ],
+            "kustutatav": true,
+            "eeldatav": {
+                "sularaha": 389.97,
+                "arvelRaha": 2234.65,
+                "krediit": 300.01,
+                "taara": 12.3,
+                "tootedKokku": 66.846,
+                "kokku": 3003.056
+            },
+            "loetud": {
+                "sularaha": 389.97,
+                "taara": 12.3,
+                "tootedKokku": 66.086,
+                "kokku": 3002.296
+            },
+            "tooted": [
+              {
+                "id": "ax7Gji",
+                "nimi": "A. Le Coq Premium",
+                "taara": "klaaspudel",
+                "uhikuKogus": "0,5l",
+                "eeldatavKogus": 54,
+                "loetudKogus": 54,
+                "omahind": 0.909
+              },
+              {
+                "id": "239e8h",
+                "nimi": "A. Le Coq Special",
+                "taara": "purk",
+                "uhikuKogus": "1 pint",
+                "eeldatavKogus": 1,
+                "loetudKogus": 0,
+                "omahind": 0.76
+              },
+              {
+                "id": "100e8h",
+                "nimi": "Milka Daim",
+                "taara": null,
+                "uhikuKogus": "100 grammi",
+                "eeldatavKogus": 20,
+                "loetudKogus": 20,
+                "omahind": 0.85
+              }
+            ]
+        }
+
+### Muuda inventuuri [PUT]
+Inventuuri muutmiseks peavad sul olema joogivanema õigused vastaval semestril ning tehingud ei tohi olla külmutatud vastaval semestril ning sa pead olema vastava inventuuri sooritajate nimekirjas.
+
+Juhul kui tegu on ameti üle andmisega seotud inventuuriga, ei tohi muutmiseks olla kummagi inventuuriga seotud semestri tehingud külmutatud.
+
++ Request (application/json)
+
+        {
+            "kommentaar": "Muudetud kommentaar"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": "oij0a9",
+            "aeg": "2016-01-01T06:36:09.004Z",
+            "kommentaar": "Muudetud kommentaar",
+            "sooritajad": [
+              {
+                "id": "casdnc",
+                "staatus": "ksv!",
+                "nimi": "Madis Martin Lutter"
+              },
+              {
+                "id": "asytcf",
+                "staatus": "ksv!",
+                "nimi": "Kaarel Ratas"
+              }
+            ],
+            "kustutatav": true,
+            "eeldatav": {
+                "sularaha": 389.97,
+                "arvelRaha": 2234.65,
+                "krediit": 300.01,
+                "taara": 12.3,
+                "tootedKokku": 66.846,
+                "kokku": 3003.056
+            },
+            "loetud": {
+                "sularaha": 389.97,
+                "taara": 12.3,
+                "tootedKokku": 66.086,
+                "kokku": 3002.296
+            },
+            "tooted": [
+              {
+                "id": "ax7Gji",
+                "nimi": "A. Le Coq Premium",
+                "taara": "klaaspudel",
+                "uhikuKogus": "0,5l",
+                "eeldatavKogus": 54,
+                "loetudKogus": 54,
+                "omahind": 0.909
+              },
+              {
+                "id": "239e8h",
+                "nimi": "A. Le Coq Special",
+                "taara": "purk",
+                "uhikuKogus": "1 pint",
+                "eeldatavKogus": 1,
+                "loetudKogus": 0,
+                "omahind": 0.76
+              },
+              {
+                "id": "100e8h",
+                "nimi": "Milka Daim",
+                "taara": null,
+                "uhikuKogus": "100 grammi",
+                "eeldatavKogus": 20,
+                "loetudKogus": 20,
+                "omahind": 0.85
+              }
+            ]
+        }
+
+### Kustuta inventuur [DELETE]
+Inventuuri kustutamiseks peavad sul olema joogivanema õigused vastaval semestril ning tehingud ei tohi olla külmutatud vastaval semestril. Sa pead olema inventuuri sooritajate hulgas.
+
+Ameti üle andmisega seotud inventuuri ei saa kustutada.
+
++ Response 204 (application/json)
+
+# Data Structures
+
+## varad (object)
+
++ id: aoisj8
++ sularaha: 120.56 (number) - Sularaha kogus
++ arvelRaha: 2204.32 (number) - Pangakontol oleva raha kogus
++ tooted: 267.983457 (number) - Laos olevate toodete koguväärtus
++ taara: 14.8 (number) - Taara koguväärtus
++ krediit: 300.01 (number) - Liikmete saldode summa vastandväärtus.
++ aeg: `2016-12-06T06:36:09.546Z`
+
+## toode loomine
+
++ nimi: `A. Le Coq Premium` (string, required)
++ taara: `pudel` (string, optional)
++ uhikuKogus: `0,5l` (string, optional)
++ muugihind: 1 (number, required) - Kauba edasimüügihind.
++ triipkood: 982763489 (string, optional)
++ kategooriad (array, optional)
+    + õlu - Kategooria nimi.
+
+## toode kollektsioonvaade
+
++ id: ax7Gji
++ Include toode loomine
++ kogus: 100 (number) - Mitu ühikut toodet on laos.
++ omahind: 0.652 (number) - Kauba sisse ostmise tükihinna kaalutud keskmine.
++ aegumiskuupaev: `2016-12-06T06:36:09Z` - Varaseim aegumiskuupäev, mida esineb laos.
++ aeguvaKogus: 20 (number) - Varaseima aegumiskuupäevaga toodete kogus laos
++ arhiveeritud: false (boolean) - Kas toode on arhiveeritud?
++ kustutatav: false (boolean) - Kas toodet saab kustutada. Sõltub sellest, kas tootele viitab mõni tehing.
+
+## toode detailvaade
+
++ Include toode kollektsioonvaade
++ batchid (array)
+    + (object)
+        + id: `ax7Gji` - Batchi ID.
+        + aegumiskuupaev: `2016-12-06T06:36:09Z` - Vastava batchi aegumiskuupäev.
+        + laoseis: 20 (number) - Kui mitu toodet sellest batchist on hetkel laos.
+        + uhikuHind: 0.76 (number) - Toote sisseostmise tükihind.
+        + ostukogus: 20 (number) - Sisse ostetud ühikute kogus selles batchis.
+        + ostuhetk: `2016-01-01T06:36:09Z` - Batchi sisse ostmise hetk.
+
+## toode detailvaade uus
+
++ Include toode loomine
++ id: ubgukb
++ kogus: 0 (number) - Mitu ühikut toodet on laos.
++ omahind (number, nullable) - Kauba sisse ostmise tükihinna kaalutud keskmine.
++ aegumiskuupaev (string, nullable) - Varaseim aegumiskuupäev, mida esineb laos.
++ aeguvaKogus (number, nullable) - Varaseima aegumiskuupäevaga toodete kogus laos
++ arhiveeritud: false (boolean) - Kas toode on arhiveeritud?
++ kustutatav: true (boolean) - Kas toodet saab kustutada? Sõltub sellest, kas tootele viitab mõni tehing.
++ batchid (array, nullable)
+
+## liige loomine
+
++ nimi: Madis Martin Lutter (string, required)
++ meiliaadress: mlutter@gmail.com (string, required)
++ staatus: ksv! (string, optional)
++ koondis: Tallinn (string, optional) - Mis koondisesse liige sisse astus?
++ telefon: 56238919 (string, optional)
+
+## liige
+
++ id: casdnc (string) - Liikme ID.
++ Include liige loomine
++ saldo: 11.23 (number) - Positiivne arv tähendab, et liikmel on ettemaks. Negatiivne arv tähendab võlga joogikassa ees.
++ viimaneMakse: `2016-01-01T06:36:09.004Z` (string, nullable) - Viimase makse hetk.
++ kustutatav (boolean) - Kas liiget saab kustutada? Sõltub sellest, kas liikmele viitab mõni tehing.
++ arhiveeritud (boolean) - Kas liige on arhiveeritud?
+
+## liige uus
+
++ id: casdnc (string) - Liikme ID.
++ Include liige loomine
++ saldo: 0 (number) - Positiivne arv tähendab, et liikmel on ettemaks. Negatiivne arv tähendab võlga joogikassa ees.
++ viimaneMakse (string, nullable) - Viimase makse hetk.
++ kustutatav (boolean) - Kas liiget saab kustutada? Sõltub sellest, kas liikmele viitab mõni tehing.
++ arhiveeritud (boolean) - Kas liige on arhiveeritud?
+
+## tehing loomine
+
++ aeg (string, optional) - Tähistab tehingu toimumise hetke. Vaikimisi päringu sooritamise hetk.
++ selgitus (string, optional)
++ Include kreedit (required) - Vähenev vara.
++ Include deebet (required) - Suurenev vara.
+
+## tehing
+
++ id: 4dsiej (string) - Tehingu ID.
++ Include tehing loomine
++ looja - Kasutajakonto, kellelt tuli tehingu loomise päring.
+    + id: casdnc - Liikme ID.
+    + staatus: ksv!
+    + nimi: Madis Martin Lutter
++ muudetav: true (boolean) - Kas kasutaja saab tehingut muuta? Muutmine on keelatud tehingute puhul, mille on loonud back-end automaatselt, et laoseis inventuuril loetud summadega vastavusse viia.
++ legaalne: true (boolean) - Tehing ei ole legaalne, kui selle tulemusel muutub kreedit poole peal oleva vara kogus negatiivseks tehingujärgselt.
+
+## tehing uus
+
++ id: coiasw (string) - Tehingu ID.
++ Include tehing loomine
++ looja - Kasutajakonto, kellelt tuli tehingu loomise päring.
+    + id: casdnc - Liikme ID.
+    + staatus: ksv!
+    + nimi: Madis Martin Lutter
++ muudetav: true (boolean) - Kas kasutaja saab tehingut muuta? Muutmine on keelatud tehingute puhul, mille on loonud back-end automaatselt, et laoseis inventuuril loetud summadega vastavusse viia.
++ legaalne: true (boolean) - Tehing ei ole legaalne, kui selle tulemusel muutub kreedit poole peal oleva vara kogus negatiivseks tehingujärgselt.
+
+## kreedit
+
++ kreedit (object) - Vähenev vara.
+    + Include tuup (required) - Vara tüüp.
+    + summa (number, required) - Pole kohustuslik, kui tuup==toode.
+    + toode (optional) - Kohustuslik kui tuup==toode.
+        + id (required) - Toote id.
+        + nimi (string)
+        + taara (string, nullable)
+        + uhikuKogus (string)
+    + kogus (number, optional) - Kohustuslik kui tuup==toode. Müüdavate toodete kogus.
+    + liige (optional) - Kohustuslik kui tuup==liige.
+        + id (required) - Liikme id.
+        + nimi (string)
+        + staatus (string)
+
+## deebet
+
++ deebet (object) - Suurenev vara.
+    + Include tuup (required) - Vara tüüp.
+    + summa (number, required)
+    + toode (optional) - Kohustuslik kui tuup==toode.
+        + id (required) - Toote id.
+        + aegumiskuupaev (required) - Toote aegumiskuupäev.
+        + nimi (string)
+        + taara (string, nullable)
+        + uhikuKogus (string)
+    + kogus - Kohustuslik kui tuup==toode. Sisse ostetud toodete kogus.
+    + liige (optional) - Kohustuslik kui tuup==liige.
+        + id (required) - Liikme ID.
+        + nimi (string)
+        + staatus (string)
+
+## tuup
+
++ tuup (enum)
+    + tuhi
+    + sularaha
+    + arvelRaha
+    + liige
+    + toode

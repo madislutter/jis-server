@@ -1,0 +1,29 @@
+{
+  "id": "ste3ej",
+  "aeg": "2016-01-03T06:37:09",
+  "selgitus": "Ostsin šokolaadi sisse",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 8.8
+  },
+  "deebet": {
+    "tuup": "toode",
+    "summa": 8.8,
+    "kogus": 10,
+    "aegumiskuupaev": "2018-04-06T06:36:09Z",
+    "toode": {
+      "id": "100e8h",
+      "nimi": "Milka Daim",
+      "taara": null,
+      "uhikuKogus": "100 grammi",
+      "omahind": 0.88
+    }
+  }
+}

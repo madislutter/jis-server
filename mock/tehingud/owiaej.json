@@ -1,0 +1,29 @@
+{
+  "id": "owiaej",
+  "aeg": "2016-01-01T06:38:09Z",
+  "selgitus": "Ostsin Premiumit sisse",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 26
+  },
+  "deebet": {
+    "tuup": "toode",
+    "summa": 26,
+    "kogus": 40,
+    "aegumiskuupaev": "2018-06-06T06:36:09Z",
+    "toode": {
+      "id": "ax7Gji",
+      "nimi": "A. Le Coq Premium",
+      "taara": "pudel",
+      "uhikuKogus": "0,5l",
+      "omahind": 0.65
+    }
+  }
+}

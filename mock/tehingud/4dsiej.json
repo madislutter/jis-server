@@ -1,0 +1,20 @@
+{
+  "id": "4dsiej",
+  "aeg": "2016-01-02T06:37:09Z",
+  "selgitus": "Ostsin veel Specialit sisse (taara)",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 4
+  },
+  "deebet": {
+    "tuup": "taara",
+    "summa": 4
+  }
+}

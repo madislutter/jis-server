@@ -1,0 +1,29 @@
+{
+  "id": "4re3ej",
+  "aeg": "2016-01-02T06:37:09Z",
+  "selgitus": "Ostsin veel Specialit sisse",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 36
+  },
+  "deebet": {
+    "tuup": "toode",
+    "summa": 36,
+    "kogus": 40,
+    "aegumiskuupaev": "2018-06-06T06:36:09Z",
+    "toode": {
+      "id": "239e8h",
+      "nimi": "A. Le Coq Special",
+      "taara": "purk",
+      "uhikuKogus": "1 pint",
+      "omahind": 0.9
+    }
+  }
+}

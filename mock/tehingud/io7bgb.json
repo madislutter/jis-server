@@ -1,0 +1,20 @@
+{
+  "id": "io7bgb",
+  "aeg": "2016-01-04T07:36:09.005Z",
+  "selgitus": "Ostsin pastakaid",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "sularaha",
+    "summa": 3.5
+  },
+  "deebet": {
+    "tuup": "tuhi",
+    "summa": 0
+  }
+}

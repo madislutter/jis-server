@@ -1,0 +1,34 @@
+{
+  "id": "ioubgb",
+  "aeg": "2016-01-04T06:36:09.005Z",
+  "selgitus": "Müüsin liikmele toote",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "toode",
+    "summa": 0.76,
+    "kogus": 1,
+    "aegumiskuupaev": "2016-12-06T06:36:09Z",
+    "toode": {
+      "id": "ax7Gji",
+      "nimi": "A. Le Coq Premium",
+      "taara": "pudel",
+      "uhikuKogus": "0,5l",
+      "omahind": 0.76
+    }
+  },
+  "deebet": {
+    "tuup": "liige",
+    "summa": 1,
+    "liige": {
+      "id": "asytcf",
+      "staatus": "ksv!",
+      "nimi": "Kaarel Ratas"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "owiarj",
+  "aeg": "2016-01-01T06:38:09Z",
+  "selgitus": "Ostsin Premiumit sisse (taara)",
+  "looja": {
+    "id": "casdnc",
+    "staatus": "ksv!",
+    "nimi": "Madis Martin Lutter"
+  },
+  "muudetav": true,
+  "legaalne": true,
+  "kreedit": {
+    "tuup": "arvelRaha",
+    "summa": 4
+  },
+  "deebet": {
+    "tuup": "taara",
+    "summa": 4
+  }
+}

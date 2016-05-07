@@ -1,0 +1,30 @@
+{
+  "id": "100e8h",
+  "nimi": "Milka Daim",
+  "taara": null,
+  "uhikuKogus": "100 grammi",
+  "kogus": 10,
+  "omahind": 0.88,
+  "muugihind": 13.37,
+  "triipkood": "98793280",
+  "aegumiskuupaev": "2018-04-06T06:36:09Z",
+  "aeguvaKogus": 10,
+  "arhiveeritud": false,
+  "kustutatav": false,
+  "kategooriad": [
+    {
+      "id": "oadej0",
+      "nimi": "toit"
+    }
+  ],
+  "batchid": [
+    {
+      "id": "oi8sjo",
+      "aegumiskuupaev": "2016-12-06T06:36:09Z",
+      "laoseis": 10,
+      "uhikuHind": 0.88,
+      "ostukogus": 10,
+      "ostuhetk": "2016-01-01T06:36:09Z"
+    }
+  ]
+}
