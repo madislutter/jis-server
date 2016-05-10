@@ -6,15 +6,11 @@ var app = express();
 
 app.use(morgan("dev"));
 app.use(function(req, res, next) {
-  // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
-// app.use(express.errorHandler({dumpExceptions: true, showStack: true}));
-// app.configure(function() {
-// });
 
 var files = glob.sync(__dirname+'/mock/**/*.json');
 files.forEach(function(fileName) {
@@ -31,5 +27,5 @@ files.forEach(function(fileName) {
 });
 
 app.listen(3002, function() {
-  console.log('Joodiku mock back-end jookseb pordil 3002...');
+  console.log('JIS mock back-end kuulab pordil 3002...');
 });
