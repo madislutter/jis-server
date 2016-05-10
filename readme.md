@@ -12,6 +12,8 @@ nvm install node
 nvm use node
 ```
 
+## Paigaldamine
+
 Rakenduse oma arvutisse paigaldamiseks ja käima panemiseks jooksuta järgmised käsud kataloogist, kuhu soovid rakendust paigaldada:
 
 ```bash
